@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2020_12_09_193927) do
     t.string "name"
     t.datetime "date"
     t.string "url"
-    t.string "type"
+    t.string "event_type"
     t.integer "band_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

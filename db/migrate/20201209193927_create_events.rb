@@ -4,7 +4,7 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.string :name
       t.datetime :date
       t.string :url
-      t.string :type
+      t.string :event_type
       t.integer :band_id
 
       t.timestamps

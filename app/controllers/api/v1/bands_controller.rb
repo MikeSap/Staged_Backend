@@ -1,4 +1,4 @@
-class BandsController < ApplicationController
+class Api::V1::BandsController < ApplicationController
 
     def index
         bands = Bands.all

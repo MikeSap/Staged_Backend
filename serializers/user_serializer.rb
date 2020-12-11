@@ -1,4 +1,4 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username
-  has_many :events
+  attributes :id, :username, :city
+  has_many :followed, :bands
 end

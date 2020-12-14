@@ -1,5 +1,6 @@
 class Api::V1::CommentsController < ApplicationController
-    
+    skip_before_action :require_login
+
     def index
         comment = Comment.all
     

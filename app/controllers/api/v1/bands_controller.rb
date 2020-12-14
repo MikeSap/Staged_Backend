@@ -1,13 +1,16 @@
 class Api::V1::BandsController < ApplicationController
+    skip_before_action :require_login
+    before_action :set_band, only: [:show]
+
 
     def index
-        bands = Bands.all
+        bands = Band.all
     
         render json: bands
       end
 
     def show
-        render json: band
+        render json: @band
     end
 
     def create
@@ -22,7 +25,7 @@ class Api::V1::BandsController < ApplicationController
     
     private
     def set_band
-    band = Band.find(params[:id])
+    @band = Band.find(params[:id])
     end
 
     def band_params

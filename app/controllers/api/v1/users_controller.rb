@@ -9,7 +9,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    render json: user
+    render json: @user
   end
 
   def create
@@ -25,20 +25,20 @@ class Api::V1::UsersController < ApplicationController
 end
 
   def update
-    if user.update(user_params)
-      render json: user
+    if @user.update(user_params)
+      render json: @user
     else
-      render json: user.errors, status: :unprocessable_entity
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    user.destroy
+    @user.destroy
   end
 
   private
     def set_user
-      user = User.find(params[:id])
+     @user = User.find(params[:id])
     end
 
     def user_params

@@ -26,6 +26,9 @@ Connection.create(follower_id: j.id, followed_id: sb.id)
 
 
 album = Event.create(name:"The off-white album", date: "2021-01-02 00:00", url: "www.bandcamp.com/shitty_beatles/offwhite", event_type: "Music", band: sb)
+album = Event.create(name:"The off-white album2", date: "2021-01-03 00:00", url: "www.bandcamp.com/shitty_beatles/offwhite", event_type: "Music", band: sb)
+album = Event.create(name:"The off-white album3", date: "2021-01-04 00:00", url: "www.bandcamp.com/shitty_beatles/offwhite", event_type: "Music", band: sb)
+album = Event.create(name:"The off-white album4", date: "2021-01-05 00:00", url: "www.bandcamp.com/shitty_beatles/offwhite", event_type: "Music", band: sb)
 
 Comment.create(user:m, event: album, content: "This album aiiiight" )
 

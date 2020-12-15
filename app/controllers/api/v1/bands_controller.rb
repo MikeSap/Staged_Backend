@@ -14,9 +14,13 @@ class Api::V1::BandsController < ApplicationController
     end
 
     def create
+        byebug
         band = Band.new(band_params)
         if band.save
-            BandMember.new(user_id: params[:user_id], band:band)
+            # params[:user_ids].each do |id|
+            #     byebug
+                BandMember.create(user_id: params[:user_ids].to_i, band:band)
+            # end
             render json: band
         else
             render json: {errors: "Band not created"}
@@ -29,6 +33,6 @@ class Api::V1::BandsController < ApplicationController
     end
 
     def band_params
-    params.require(:band).permit(:name, :city, :url, :bio)
+    params.permit(:name, :city, :url, :bio)
     end
 end

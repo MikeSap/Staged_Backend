@@ -17,7 +17,7 @@ class Api::V1::UsersController < ApplicationController
     if user.save
         payload = {user_id: user.id}
         token = encode_token(payload)
-        puts token
+        byebug
         render json: {user: UserSerializer.new(user), jwt: token}
     else
         render json: {errors: "User not created"}
@@ -42,6 +42,6 @@ end
     end
 
     def user_params
-      params.require(:user).permit(:email, :username, :city, :password, :password_confirmation)
+      params.permit(:email, :username, :city, :password, :password_confirmation)
     end
 end

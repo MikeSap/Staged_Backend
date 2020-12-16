@@ -52,7 +52,7 @@ t2 = Time.parse("2021-1-31 23:59:59")
 50.times do
     time = rand(t1..t2)
     album = Faker::Music.album
-    Event.create(name: album, date: time, url: "www.bandcamp.com/#{album}", event_type:event_types.sample, band: bands.sample)
+    Event.create(name: album, date: time, url: "http://www.bandcamp.com/#{album}", event_type:event_types.sample, band: bands.sample)
 end
 # album = Event.create(name:"The off-white album", date: "2021-01-02 00:00", url: "www.bandcamp.com/shitty_beatles/offwhite", event_type: "Music", band: sb)
 # album = Event.create(name:"The off-white album2", date: "2021-01-03 00:00", url: "www.bandcamp.com/shitty_beatles/offwhite", event_type: "Music", band: sb)

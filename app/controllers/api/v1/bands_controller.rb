@@ -14,13 +14,11 @@ class Api::V1::BandsController < ApplicationController
     end
 
     def create
-        byebug
         band = Band.new(band_params)
         if band.save
-            # params[:user_ids].each do |id|
-            #     byebug
-                BandMember.create(user_id: params[:user_ids].to_i, band:band)
-            # end
+            params[:user_ids].split("").each do |id|
+                BandMember.create(user_id: id.to_i, band:band)
+            end
             render json: band
         else
             render json: {errors: "Band not created"}

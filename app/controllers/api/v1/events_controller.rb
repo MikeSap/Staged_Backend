@@ -18,7 +18,6 @@ class Api::V1::EventsController < ApplicationController
     end
 
     def update
-        byebug
         event = Event.find(params["id"])
         event.update(event_params)
         if event.valid?

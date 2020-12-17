@@ -17,7 +17,6 @@ class Api::V1::UsersController < ApplicationController
     if user.save
         payload = {user_id: user.id}
         token = encode_token(payload)
-        byebug
         render json: {user: UserSerializer.new(user), jwt: token}
     else
         render json: {errors: "User not created"}

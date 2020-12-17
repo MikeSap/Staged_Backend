@@ -1,3 +1,8 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :user_id, :event_id, :content
+  attributes :id, :user, :event_id, :content
+
+  def user
+    u = User.find(object.user_id)
+  end
+
 end

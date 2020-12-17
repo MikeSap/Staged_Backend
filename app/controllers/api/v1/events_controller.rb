@@ -17,6 +17,23 @@ class Api::V1::EventsController < ApplicationController
         render json: event
     end
 
+    def update
+        byebug
+        event = Event.find(params["id"])
+        event.update(event_params)
+        if event.valid?
+            render json: event
+        else
+            render json: {errors: event.errors.fullmessages}, status: 401
+        end
+    end
+
+    def destroy
+        event = Event.find(params["id"])
+        event.destroy
+        render json: event
+    end
+
     private
     
     def event_params

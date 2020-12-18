@@ -1,12 +1,11 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :name, :date, :url, :event_type, :band, :comments
+  attributes :id, :name, :date, :url, :event_type, :comments, :band
   belongs_to :band
-  has_many :comments
 
-  # def comments
-  #   object.comments.map do |com|
-  #   CommentSerializer.new(com)
-  #   end
-  # end
+  def comments
+    object.comments.map do |com|
+    CommentSerializer.new(com)
+    end
+  end
 
 end

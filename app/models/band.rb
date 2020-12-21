@@ -7,4 +7,7 @@ class Band < ApplicationRecord
     has_many :users, through: :band_members, foreign_key: :user_id
     has_many :events
     has_many :comments, through: :events
+
+    has_one_attached :photo
+
 end

@@ -20,7 +20,9 @@ users = [m,d,c,j]
     url = "www.bandcamp.com/#{band}"
     bio = "#{band} is aight"
 
-    Band.create(name: band, city: city, url:url, bio: bio)
+    band = Band.new(name: band, city: city, url:url, bio: bio)
+    band.photo.attach(io:File.open("app/assets/logo/staged_logo.png"), filename: "staged_logo.png", content_type: "image/png")
+    band.save
 
 end
 
@@ -52,7 +54,10 @@ t2 = Time.parse("2021-1-31 23:59:59")
 50.times do
     time = rand(t1..t2)
     album = Faker::Music.album
-    Event.create(name: album, date: time, url: "http://www.bandcamp.com/#{album}", event_type:event_types.sample, band: bands.sample)
+    event = Event.new(name: album, date: time, url: "http://www.bandcamp.com/#{album}", event_type:event_types.sample, band: bands.sample)
+    event.photo.attach(io:File.open("app/assets/logo/staged_logo.png"), filename: "staged_logo.png", content_type: "image/png")
+    event.save
+
 end
 # album = Event.create(name:"The off-white album", date: "2021-01-02 00:00", url: "www.bandcamp.com/shitty_beatles/offwhite", event_type: "Music", band: sb)
 # album = Event.create(name:"The off-white album2", date: "2021-01-03 00:00", url: "www.bandcamp.com/shitty_beatles/offwhite", event_type: "Music", band: sb)

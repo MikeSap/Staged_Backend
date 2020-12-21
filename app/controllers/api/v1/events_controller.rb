@@ -8,11 +8,10 @@ class Api::V1::EventsController < ApplicationController
 
     def create     
         event = Event.new(event_params)
-        
-        # if params["photo"] == "null"
-        #     return render json: {errors: ["Must Have Photo Attached"]}, status: 401   
-        # end 
-
+        if params["photo"] == "null"
+          #attach a default photo 
+          event.photo.attach(io:File.open("app/assets/logo/staged_logo.png"), filename: "staged_logo.png", content_type: "image/png")
+        end
         return render json: {errors: event.errors.full_messages}, status: 401 unless event.save  
         render json: event
     end
@@ -36,7 +35,7 @@ class Api::V1::EventsController < ApplicationController
     private
     
     def event_params
-        params.permit("name", "date", "url", "event_type", "band_id")
+        params.permit("name", "date", "url", "event_type", "band_id", "photo")
     end
 
 end

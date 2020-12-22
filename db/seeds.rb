@@ -13,7 +13,7 @@ j = User.create(email: "jeff@jeff.com", username: "JeffBol", city:"Chicago", pas
 
 users = [m,d,c,j]
 
-25.times do
+50.times do
 
     band = Faker::Music.band
     city = "Chicago"
@@ -39,7 +39,7 @@ BandMember.create(band: bands.sample, user: c)
 BandMember.create(band: bands.sample, user: j)
 
 
-20.times do
+35.times do
     Connection.create(follower_id: users.sample.id, followed_id: bands.sample.id)
 end
 # Connection.create(follower_id: m.id, followed_id: sz.id)
@@ -48,10 +48,10 @@ end
 # Connection.create(follower_id: j.id, followed_id: sb.id)
 
 event_types = ["Music", "Show","Merch"]
-t1 = Time.parse("2020-11-01 00:00:00")
+t1 = Time.parse("2020-12-15 00:00:00")
 t2 = Time.parse("2021-1-31 23:59:59")
 
-50.times do
+100.times do
     time = rand(t1..t2)
     album = Faker::Music.album
     event = Event.new(name: album, date: time, url: "http://www.bandcamp.com/#{album}", event_type:event_types.sample, band: bands.sample)
@@ -69,6 +69,6 @@ end
 
 events = Event.all
 
-100.times do
+200.times do
     Comment.create(user:users.sample, event: events.sample, content: Faker::Hipster.sentence )
 end

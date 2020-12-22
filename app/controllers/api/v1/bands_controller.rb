@@ -1,4 +1,6 @@
 class Api::V1::BandsController < ApplicationController
+  include Rails.application.routes.url_helpers
+
     skip_before_action :require_login
     before_action :set_band, only: [:show]
 
@@ -27,6 +29,14 @@ class Api::V1::BandsController < ApplicationController
         else
             render json: {errors: "Band not created"}
         end
+    end
+
+    def band_info
+      band_id = params["band_id"]["id"]
+      band = Band.find(band_id)
+      upcomingEvents = Event.where( band_id: band_id).where("date >= ?", Date.today)
+      pastEvents = Event.where( band_id: band_id).where("date < ?", Date.today)
+      render json: {band: band, photo: rails_blob_path(band.photo), upcomingEvents: upcomingEvents, pastEvents: pastEvents}
     end
     
     private

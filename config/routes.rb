@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       resources :connections
       post "/login", to: "auth#login"
       get "/auto_login", to: "auth#auto_login"
+      
+      get "/followed_events", to: "events#followed_events"
+      get "/suggested_events", to: "events#suggested_events"
 
     end
   end

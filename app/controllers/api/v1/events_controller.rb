@@ -1,5 +1,5 @@
 class Api::V1::EventsController < ApplicationController
-    skip_before_action :require_login
+    skip_before_action :require_login, only: [:index]
 
     def index
         events = Event.all
@@ -30,6 +30,21 @@ class Api::V1::EventsController < ApplicationController
         event = Event.find(params["id"])
         event.destroy
         render json: event
+    end
+
+    def followed_events
+      byebug
+      # find events that the user doesn't have 
+    end
+
+    def suggested_events
+      user_followed_ids = @user.followed.map { |band| band.id }
+      user_band_ids = @user.bands.map { |band| band.id }
+      all_ids = user_followed_ids + user_band_ids
+      suggested_events = Event.where.not( band_id: all_ids)
+      .where("date > ?", Date.today)
+      .sample(5)
+      render json: suggested_events
     end
 
     private

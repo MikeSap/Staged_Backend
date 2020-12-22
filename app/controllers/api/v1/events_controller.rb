@@ -33,8 +33,9 @@ class Api::V1::EventsController < ApplicationController
     end
 
     def followed_events
-      byebug
-      # find events that the user doesn't have 
+      user_followed_ids = @user.followed.map { |band| band.id }
+      followed_events = Event.where( band_id: user_followed_ids).where("date > ?", Date.today)
+      render json: followed_events
     end
 
     def suggested_events
@@ -42,9 +43,19 @@ class Api::V1::EventsController < ApplicationController
       user_band_ids = @user.bands.map { |band| band.id }
       all_ids = user_followed_ids + user_band_ids
       suggested_events = Event.where.not( band_id: all_ids)
-      .where("date > ?", Date.today)
+      .where("date >= ?", Date.today)
       .sample(5)
       render json: suggested_events
+    end
+
+    def date_events
+      date_events = Event.where("DATE(date) = ?", params[:date].to_time)
+      render json: date_events
+    end
+
+    def managed_events
+      managed_events = Event.where( band_id: params["band_id"].to_i).where("date >= ?", Date.today)
+      render json: managed_events
     end
 
     private

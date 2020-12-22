@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       
       get "/followed_events", to: "events#followed_events"
       get "/suggested_events", to: "events#suggested_events"
+      post "/date_events", to: "events#date_events"
+      post "/managed_events", to: "events#managed_events"
 
     end
   end

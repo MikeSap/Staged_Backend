@@ -4,7 +4,8 @@ class Api::V1::ConnectionsController < ApplicationController
     def create
         connection = Connection.new(connection_params)
         if connection.save
-            render json: connection
+          events = Event.where(band_id: connection.followed_id).where("date > ?", Date.today)
+            render json: events
         else
             render json: {errors: "Did not follow"}
         end

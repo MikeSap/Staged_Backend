@@ -21,7 +21,7 @@ class Api::V1::UsersController < ApplicationController
     else
         render json: {errors: "User not created"}
     end
-end
+  end
 
   def update
     if @user.update(user_params)

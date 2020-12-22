@@ -6,8 +6,9 @@ class Api::V1::EventsController < ApplicationController
         render json: events
     end
 
-    def create     
+    def create 
         event = Event.new(event_params)
+        byebug
         if params["photo"] == "null"
           #attach a default photo 
           event.photo.attach(io:File.open("app/assets/logo/staged_logo.png"), filename: "staged_logo.png", content_type: "image/png")

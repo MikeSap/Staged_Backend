@@ -31,6 +31,23 @@ class Api::V1::BandsController < ApplicationController
         end
     end
 
+    def update
+        band = Band.find(params["id"])
+        if params["photo"] == "null"
+          # dont save over photo that already exists if the edited form doesnt have a photo
+        end 
+        band.update(band_params)
+        if band.save
+            # params[:user_ids].split("").each do |id|
+            #add or delete band members 
+            #     BandMember.create(user_id: id.to_i, band:band)
+            # end
+            render json: band
+        else
+            render json: {errors: "Band not created"}
+        end
+    end
+
     def band_info
       band_id = params["band_id"]["id"]
       band = Band.find(band_id)
@@ -45,6 +62,6 @@ class Api::V1::BandsController < ApplicationController
     end
 
     def band_params
-    params.permit(:name, :city, :url, :bio, :photo)
+    params.permit(:name, :city, :url, :bio, :photo, :users)
     end
 end

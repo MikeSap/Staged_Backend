@@ -34,9 +34,10 @@ class Api::V1::BandsController < ApplicationController
     def update
         band = Band.find(params["id"])
         if params["photo"] == "null"
-          # dont save over photo that already exists if the edited form doesnt have a photo
+          band.update(no_photo_params)
+        else
+          band.update(band_params)
         end 
-        band.update(band_params)
         if band.save
             # params[:user_ids].split("").each do |id|
             #add or delete band members 
@@ -63,5 +64,9 @@ class Api::V1::BandsController < ApplicationController
 
     def band_params
     params.permit(:name, :city, :url, :bio, :photo, :users)
+    end
+
+    def no_photo_params
+    params.permit(:name, :city, :url, :bio, :users)
     end
 end

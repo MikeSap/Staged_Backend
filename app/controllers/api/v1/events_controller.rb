@@ -32,9 +32,11 @@ class Api::V1::EventsController < ApplicationController
         render json: event
     end
 
-    def followed_events
+    def followed_events      
       user_followed_ids = @user.followed.map { |band| band.id }
       followed_events = Event.where( band_id: user_followed_ids).where("date > ?", Date.today).order(date: :asc).page(params[:page].to_i)
+      # last_page = Event.where( band_id: user_followed_ids).where("date > ?", Date.today).order(date: :asc).page(params[:page].to_i).last_page?
+      # send this back and save to store, if last page, disable button 
       render json: followed_events
     end
 

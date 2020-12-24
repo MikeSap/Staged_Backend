@@ -12,7 +12,10 @@ class Api::V1::BandsController < ApplicationController
       end
 
     def show
-        render json: @band
+        bands = Band.all.page(params[:id].to_i)
+        total_pages = Band.all.page(params[:id].to_i).total_pages
+        #send total pages back and disable button when page ===
+        render json: bands
     end
 
     def create

@@ -1,5 +1,5 @@
 class Api::V1::EventsController < ApplicationController
-    skip_before_action :require_login, only: [:index]
+    skip_before_action :require_login, only: [:index, :music, :merch, :shows]
 
     def index
         events = Event.all
@@ -34,7 +34,7 @@ class Api::V1::EventsController < ApplicationController
 
     def followed_events
       user_followed_ids = @user.followed.map { |band| band.id }
-      followed_events = Event.where( band_id: user_followed_ids).where("date > ?", Date.today)
+      followed_events = Event.where( band_id: user_followed_ids).where("date > ?", Date.today).order(date: :asc).page(params[:page].to_i)
       render json: followed_events
     end
 
@@ -54,8 +54,23 @@ class Api::V1::EventsController < ApplicationController
     end
 
     def managed_events
-      managed_events = Event.where( band_id: params["band_id"].to_i).where("date >= ?", Date.today)
+      managed_events = Event.where( band_id: params["band_id"].to_i).where("date >= ?", Date.today).order(date: :asc).page(params[:page].to_i)
       render json: managed_events
+    end
+
+    def music
+      events = Event.where(event_type: "Music").where("date >= ?", Date.today).order(date: :asc).page(params[:page].to_i)
+      render json: events
+    end
+    
+    def merch
+      events = Event.where(event_type: "Merch").where("date >= ?", Date.today).order(date: :asc).page(params[:page].to_i)
+      render json: events
+    end
+    
+    def shows
+      events = Event.where(event_type: "Show").where("date >= ?", Date.today).order(date: :asc).page(params[:page].to_i)
+      render json: events
     end
 
     private

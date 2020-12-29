@@ -48,3 +48,4 @@ gem "faker", "~> 1.9"
 
 gem 'kaminari'
 
+gem "aws-sdk-s3", require: false

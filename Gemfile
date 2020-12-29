@@ -49,3 +49,7 @@ gem "faker", "~> 1.9"
 gem 'kaminari'
 
 gem "aws-sdk-s3", require: false
+
+gem 'active_storage_validations'
+
+gem 'mini_magick', '>= 4.9.5'

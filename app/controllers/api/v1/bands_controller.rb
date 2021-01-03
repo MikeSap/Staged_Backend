@@ -59,6 +59,11 @@ class Api::V1::BandsController < ApplicationController
       pastEvents = Event.where( band_id: band_id).where("date < ?", Date.today)
       render json: {band: band, photo: rails_blob_path(band.photo), upcomingEvents: upcomingEvents, pastEvents: pastEvents}
     end
+
+    def bands_search
+      bands = Band.where("name ilike ?", "%" + params["query"] + "%")
+      render json: bands
+    end
     
     private
     def set_band

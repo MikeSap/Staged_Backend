@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       post "/date_events", to: "events#date_events"
       post "/managed_events/:page", to: "events#managed_events"
       post "/band_info", to: "bands#band_info"
+      post "/bands_search", to: "bands#bands_search"
 
     end
   end

@@ -24,6 +24,7 @@ class Api::V1::BandsController < ApplicationController
           #attach a default photo 
           band.photo.attach(io:File.open("app/assets/logo/staged_logo.png"), filename: "staged_logo.png", content_type: "image/png")
         end 
+        byebug
         if band.save
             params[:user_ids].split("").each do |id|
                 BandMember.create(user_id: id.to_i, band:band)

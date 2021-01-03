@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       post "/managed_events/:page", to: "events#managed_events"
       post "/band_info", to: "bands#band_info"
       post "/bands_search", to: "bands#bands_search"
+      post "/users_search", to: "users#users_search"
 
     end
   end

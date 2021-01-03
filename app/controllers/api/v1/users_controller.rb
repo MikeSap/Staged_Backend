@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-  skip_before_action :require_login, only: [:create]
+  skip_before_action :require_login, only: [:create, :users_search]
 
   def index
     users = User.all
@@ -33,6 +33,11 @@ class Api::V1::UsersController < ApplicationController
 
   def destroy
     @user.destroy
+  end
+
+  def users_search
+    users = User.where("username ilike ?", "%" + params["query"] + "%")
+    render json: users
   end
 
   private

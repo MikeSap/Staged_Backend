@@ -42,10 +42,21 @@ class Api::V1::BandsController < ApplicationController
           band.update(band_params)
         end 
         if band.save
-            # params[:user_ids].split("").each do |id|
-            #add or delete band members 
-            #     BandMember.create(user_id: id.to_i, band:band)
-            # end
+
+            prevUsers = band.users.map { |u| u.id }
+            editedIds = params[:user_ids].split("").map { |id| id.to_i }
+            removed = prevUsers.select { |id| !editedIds.include?(id) }            
+
+            editedIds.each do |id|
+            BandMember.find_or_create_by(user_id: id.to_i, band:band)
+            
+            end
+
+            removed.each do |id|
+              bm = BandMember.find_by(band_id: band.id, user_id: id)
+              BandMember.delete(bm.id)
+            end
+
             render json: band
         else
             render json: {errors: "Band not created"}
@@ -71,10 +82,10 @@ class Api::V1::BandsController < ApplicationController
     end
 
     def band_params
-    params.permit(:name, :city, :url, :bio, :photo, :users)
+    params.permit(:name, :city, :url, :bio, :photo)
     end
 
     def no_photo_params
-    params.permit(:name, :city, :url, :bio, :users)
+    params.permit(:name, :city, :url, :bio)
     end
 end

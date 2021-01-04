@@ -78,7 +78,7 @@ class Api::V1::EventsController < ApplicationController
     private
     
     def event_params
-        params.permit("name", "date", "url", "event_type", "band_id", "photo")
+        params.permit("name", "date", "url", "event_type", "band_id", "photo", "location")
     end
 
 end

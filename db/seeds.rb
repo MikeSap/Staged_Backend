@@ -46,8 +46,9 @@ t2 = Time.parse("2021-3-31 23:59:59")
 350.times do
     time = rand(t1..t2)
     album = Faker::Music.album
-    event = Event.new(name: album, date: time, url: "http://www.bandcamp.com/#{album}", event_type:event_types.sample, band: bands.sample)
-    event.photo.attach(io:File.open("app/assets/logo/staged_logo.png"), filename: "staged_logo.png", content_type: "image/png")
+    eband= bands.sample
+    event = Event.new(name: album, date: time, url: "http://www.bandcamp.com/#{album}", event_type:event_types.sample, band: eband, location: eband.city)
+    event.photo.attach(io:File.open("app/assets/logo/navLogo.png"), filename: "navLogo.png", content_type: "image/png")
     event.save
 
 end

@@ -1,7 +1,7 @@
 class EventSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :name, :date, :url, :event_type, :comments, :band, :photo
+  attributes :id, :name, :date, :url, :event_type, :comments, :band, :photo, :location
   # belongs_to :band
 
   def band

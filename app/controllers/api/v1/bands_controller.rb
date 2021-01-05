@@ -42,9 +42,8 @@ class Api::V1::BandsController < ApplicationController
           band.update(band_params)
         end 
         if band.save
-
             prevUsers = band.users.map { |u| u.id }
-            editedIds = params[:user_ids].split("").map { |id| id.to_i }
+            editedIds = params[:user_ids].split(",").map { |id| id.to_i }
             removed = prevUsers.select { |id| !editedIds.include?(id) }            
 
             editedIds.each do |id|
@@ -55,8 +54,8 @@ class Api::V1::BandsController < ApplicationController
             removed.each do |id|
               bm = BandMember.find_by(band_id: band.id, user_id: id)
               BandMember.delete(bm.id)
-            end
-
+            end            
+            band = Band.find(band.id)
             render json: band
         else
             render json: {errors: "Band not created"}

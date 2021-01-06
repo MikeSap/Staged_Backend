@@ -6,7 +6,7 @@ class Api::V1::EventsController < ApplicationController
         render json: events
     end
 
-    def create 
+    def create
         event = Event.new(event_params)
         if params["photo"] == "null"
           #attach a default photo 
@@ -18,7 +18,12 @@ class Api::V1::EventsController < ApplicationController
 
     def update
         event = Event.find(params["id"])
-        event.update(event_params)
+         if params["photo"] == "null"
+          event.update(no_photo_params)
+        else
+          event.update(event_params)
+        end 
+        event = Event.find(params["id"])
         if event.valid?
             render json: event
         else
@@ -79,6 +84,10 @@ class Api::V1::EventsController < ApplicationController
     
     def event_params
         params.permit("name", "date", "url", "event_type", "band_id", "photo", "location")
+    end
+
+    def no_photo_params
+        params.permit("name", "date", "url", "event_type", "band_id", "location")
     end
 
 end

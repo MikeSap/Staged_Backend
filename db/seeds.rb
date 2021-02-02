@@ -15,9 +15,11 @@ z = User.create(email: "zach@zach.com", username: "ZachCar", city:Faker::Address
 wv = User.create(email: "willv@willv.com", username: "WillVet", city:Faker::Address.city, password:"123", password_confirmation:"123")
 jv = User.create(email: "josue@josue.com", username: "JosueVir", city:Faker::Address.city, password:"123", password_confirmation:"123")
 to = User.create(email: "tomo@tomo.com", username: "TomOday", city:Faker::Address.city, password:"123", password_confirmation:"123")
+k = User.create(email: "kyle@kyle.com", username: "KyleFar", city:Faker::Address.city, password:"123", password_confirmation:"123")
+bf = User.create(email: "brandon@brandon.com", username: "BrandonFon", city:Faker::Address.city, password:"123", password_confirmation:"123")
 
 
-users = [m,d,c,j,w,t,l,h,j,b,jw,js,my,z,wv,jv,to]
+users = [m,d,c,j,w,t,l,h,j,b,jw,js,my,z,wv,jv,to,k,bf]
 
 75.times do
     num= rand(1..23)
@@ -34,7 +36,7 @@ end
 
 bands = Band.all
 
-150.times do
+50.times do
 
   BandMember.create(band: bands.sample, user: users.sample)
 
